@@ -1,6 +1,6 @@
 /*
- * jQuery treegrid Plugin 0.3.0
- * https://github.com/maxazan/jquery-treegrid
+ * jQuery treegrid Plugin 0.3.0 + leaf image
+ * https://github.com/sfs-it/jquery-treegrid
  *
  * Copyright 2013, Pomazan Max
  * Licensed under the MIT licenses.
@@ -519,7 +519,10 @@
                 } else {
                     $this.show();
                 }
-                if (!$this.treegrid('isLeaf')) {
+                if ($this.treegrid('isLeaf')) {
+                    var expander = $this.treegrid('getSetting', 'getExpander').apply(this);
+                    expander.addClass($this.treegrid('getSetting', 'expanderLeafClass'));
+                } else {
                     $this.treegrid('renderExpander');
                     $this.treegrid('getChildNodes').treegrid('render');
                 }
@@ -571,6 +574,7 @@
         indentTemplate: '<span class="treegrid-indent"></span>',
         expanderExpandedClass: 'treegrid-expander-expanded',
         expanderCollapsedClass: 'treegrid-expander-collapsed',
+        expanderLeafClass: 'treegrid-expander-leaf',
         treeColumn: 0,
         getExpander: function() {
             return $(this).find('.treegrid-expander');
